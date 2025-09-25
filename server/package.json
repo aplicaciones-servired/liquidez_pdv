@@ -10,7 +10,6 @@
   },
   "keywords": [],
   "license": "ISC",
-  "type": "module",
   "dependencies": {
     "@types/morgan": "^1.9.10",
     "cors": "^2.8.5",
