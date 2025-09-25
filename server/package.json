@@ -1,19 +1,17 @@
 {
   "name": "server",
   "author": "",
-  "main": "index.js",
   "description": "",
-  "keywords": [],
-  "license": "ISC",
+  "main": "index.js",
   "scripts": {
     "start": "tsc && node --env-file=.env ./dist/index.js",
     "dev": "tsx watch --env-file=.env ./src/index.ts",
     "build": "tsc"
   },
+  "keywords": [],
+  "license": "ISC",
   "type": "module",
   "dependencies": {
-    "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.3",
     "@types/morgan": "^1.9.10",
     "cors": "^2.8.5",
     "dotenv": "^17.2.2",
@@ -27,6 +25,8 @@
   "devDependencies": {
     "@types/bun": "latest",
     "@types/node": "^24.5.2",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "@types/express": "^5.0.3",
+    "@types/cors": "^2.8.19"
   }
 }

@@ -1,16 +1,16 @@
-# Base de Node.js versión 18
 FROM node:slim
 
-# Cambiar a la carpeta de la aplicación
 WORKDIR /app
 
-# Instalar dependencias
+COPY package.json yarn.lock ./
+RUN yarn install
+
 COPY . .
 
-RUN yarn
+# Compilar el código
+RUN yarn build
 
-# Exponer el puerto
 EXPOSE 5000
 
-# Comando para ejecutar la aplicación
-CMD ["yarn", "start"]
+# Ahora ya existe /app/dist/index.js
+CMD ["node", "--env-file=.env", "./dist/index.js"]
