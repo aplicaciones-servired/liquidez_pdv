@@ -6,7 +6,7 @@ import NavBar from '../components/NavBar'
 import type { JSX } from "react/jsx-runtime";
 import { toast } from 'react-toastify';
 
-const LoginPage = lazy(async () => await import('../pages/login'))
+const LoginPage = lazy(async () => await import('../pages/Login'))
 
 
 function Root(): JSX.Element {

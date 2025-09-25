@@ -21,16 +21,9 @@ export function useLogin(): {
       .post(`${LOGIN_URL}/login`, data)
       .then((res) => {
         console.log('res', res)
-        const proceso = res.data.user.process;
-        if (proceso === "Operaciones" || proceso === "Financiero") {
           login();
           setUsernames(res.data.user as unknown as User);
           navigate("/home");
-        } else {
-          const msg = "No estás autorizado";
-          setErrorString(msg);
-          throw new Error(msg); // Lanzamos el error con el mensaje
-        }
       })
       .catch((error) => {
         // Ensure you're setting a meaningful error message

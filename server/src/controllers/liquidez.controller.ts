@@ -6,8 +6,11 @@ export const getLiquidez = async (
   req: Request,
   res: Response
 ): Promise<void> => {
-  const zona = req.params.zona || req.body.zona;
+  const data = req.params;
+  const { zona } = data;
+  console.log('first', zona)
   const empresa = zona === "Servired" ? "39628" : "39627";
+  console.log("first", empresa);
   try {
     const Liquidez = await LiquidacionModel.findAll({
       attributes: [
@@ -33,7 +36,7 @@ export const getLiquidez = async (
           { ZONA: empresa },
         ],
       },
-      order: [["HORA", "ASC"]],
+      order: [["LIQUIDEZ", "DESC"]],
     });
 
     res.status(200).json({

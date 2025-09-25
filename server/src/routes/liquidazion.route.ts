@@ -3,4 +3,4 @@ import { getLiquidez } from "../controllers/liquidez.controller";
 
 export const LiquidazionRoute = Router();
 
-LiquidazionRoute.post('/liquidazion', getLiquidez);
+LiquidazionRoute.post('/liquidazion/:zona', getLiquidez);

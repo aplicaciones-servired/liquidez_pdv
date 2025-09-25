@@ -19,9 +19,9 @@ export const Item: React.FC<ItemProps> = ({ estado, children }) => {
     " p-4 text-center rounded-lg shadow-md transition-transform duration-200 hover:scale-110 hover:shadow-lg hover:bg-gray-100";
 
   const borderClasses =
-    estado === "BAJA LIQUIDEZ" || estado === "EXCESO DE EFECTIVO"
-      ? "border-2 border-red-300"
-      : "border-2 border-blue-400";
+    (estado === "BAJA LIQUIDEZ") ? "border-2 border-red-300" : estado === "EXCESO DE EFECTIVO"
+      ? "border-2 border-blue-300"
+      : "border-2 border-green-400";
       
   return <div className={`${baseClasses} ${borderClasses}`}>{children}</div>;
 };
@@ -93,19 +93,19 @@ export default function CustomizedDialogs({
                                 <label htmlFor="DISPOSITIVO">DISPOSITIVO  <Item estado={item.ESTADO_LIQUIDEZ}>{item.DISPOSITIVO}</Item></label>
                             </Grid>
                             <Grid size={3}>
-                                <label htmlFor="UMBRAL_MINIMO">UMBRAL MINIMO  <Item estado={item.ESTADO_LIQUIDEZ}>{item.UMBRAL_MINIMO}</Item></label>
+                                <label htmlFor="UMBRAL_MINIMO">UMBRAL MINIMO  <Item estado={item.ESTADO_LIQUIDEZ}>{Number(item.UMBRAL_MINIMO).toLocaleString("es-CO")}</Item></label>
                             </Grid>
                             <Grid size={3}>
-                                <label htmlFor="UMBRAL_MAXIMO">UMBRAL MAXIMO  <Item estado={item.ESTADO_LIQUIDEZ}>{item.UMBRAL_MAXIMO}</Item></label>
+                                <label htmlFor="UMBRAL_MAXIMO">UMBRAL MAXIMO  <Item estado={item.ESTADO_LIQUIDEZ}>{Number(item.UMBRAL_MAXIMO).toLocaleString("es-CO")}</Item></label>
                             </Grid>
                             <Grid size={3}>
                                 <label htmlFor="HORA">HORA  <Item estado={item.ESTADO_LIQUIDEZ}>{item.HORA}</Item></label>
                             </Grid>
                             <Grid size={3}>
-                                <label htmlFor="LIQUIDEZ">LIQUIDEZ  <Item estado={item.ESTADO_LIQUIDEZ}>{item.LIQUIDEZ}</Item></label>
+                                <label htmlFor="LIQUIDEZ">LIQUIDEZ  <Item estado={item.ESTADO_LIQUIDEZ}>{Number(item.LIQUIDEZ).toLocaleString("es-CO")}</Item></label>
                             </Grid>
                             <Grid size={3}>
-                                <label htmlFor="ESTADO_LIQUIDEZ" >ESTADO LIQUIDEZ  <Item estado={item.ESTADO_LIQUIDEZ}>{item.ESTADO_LIQUIDEZ}</Item></label>
+                                <label htmlFor="ESTADO_LIQUIDEZ" >ESTADO LIQUIDEZ  <Item estado={item.ESTADO_LIQUIDEZ}>{Number(item.UMBRAL_MAXIMO).toLocaleString("es-CO")}</Item></label>
                             </Grid>
                         </Grid>
                     </Box>
