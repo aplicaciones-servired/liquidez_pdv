@@ -4,7 +4,7 @@ import {
   DB_LIQUIDEZ_HOST,
   DB_LIQUIDEZ_PORT,
   DB_LIQUIDEZ_DATABASE,
-} from "../config/envLiquidez";
+} from "../config/envLiquidez.js";
 import { Sequelize } from "sequelize";
 
 const dbLiquidez = new Sequelize(

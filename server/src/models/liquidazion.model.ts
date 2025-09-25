@@ -4,7 +4,7 @@ import {
   type InferAttributes,
   type InferCreationAttributes,
 } from "sequelize";
-import dbLiquidez from "../db/dbLiquidez";
+import dbLiquidez from "../db/dbLiquidez.js";
 
 class LiquidacionModel extends Model<
   InferAttributes<LiquidacionModel>,
