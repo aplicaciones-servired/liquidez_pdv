@@ -16,22 +16,26 @@ export function useLogin(): {
 
   const onSubmit = (data: FieldValues) => {
     // Retornamos la promesa
-    return axios
-      //.post("http://localhost:9010/api/v2/login", data)
-      .post(`${LOGIN_URL}/login`, data)
-      .then((res) => {
-        console.log('res', res)
+    return (
+      axios
+        //.post("http://localhost:9010/api/v2/login", data)
+        .post(`${LOGIN_URL}/login`, data)
+        .then((res) => {
+          console.log("res", res);
           login();
           setUsernames(res.data.user as unknown as User);
           navigate("/home");
-      })
-      .catch((error) => {
-        // Ensure you're setting a meaningful error message
-        const message =
-          error.response?.data?.message || error.message || "Error desconocido";
-        setErrorString(message);
-        throw new Error(message);
-      });
+        })
+        .catch((error) => {
+          // Ensure you're setting a meaningful error message
+          const message =
+            error.response?.data?.message ||
+            error.message ||
+            "Error desconocido";
+          setErrorString(message);
+          throw new Error(message);
+        })
+    );
   };
 
   return {

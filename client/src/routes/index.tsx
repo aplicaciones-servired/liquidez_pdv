@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
 import Root from './Root'
 
-const HomePage = lazy(async () => await import('../pages/Home'))
+const HomePage = lazy(async () => await import('../pages/home'))
 const Dashboard = lazy(async () => await import('../components/Dashboard'))
 
 export const BrowserRouters = createBrowserRouter([
