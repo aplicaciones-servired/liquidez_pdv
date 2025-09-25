@@ -1,0 +1,32 @@
+version: '3.7'
+
+services:
+  web-liquidez:
+    image: nginx:stable-alpine3.19-slim
+    container_name: web_liquidez_v1.0
+    volumes:
+      - ./client/dist:/usr/share/nginx/html
+      - ./conf/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api_liquidez
+    ports:
+      - "8500:80"
+    networks:
+      - red-gane-int
+
+  api_liquidez:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: liquidez-server_v1.0
+    image: liquidez-server:v1
+    networks:
+      red-gane-int:
+        aliases:
+          - liquidezserver_v1.0
+    environment:
+      - TZ=America/Bogota
+
+networks:
+  red-gane-int:
+    external: true
