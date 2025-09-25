@@ -13,4 +13,4 @@ RUN yarn
 EXPOSE 5000
 
 # Comando para ejecutar la aplicación
-CMD ["bun", "start"]
+CMD ["yarn", "start"]
