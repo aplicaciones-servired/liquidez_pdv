@@ -10,7 +10,7 @@ services:
     depends_on:
       - api_liquidez
     ports:
-      - "8500:80"
+      - "8501:80"
     networks:
       - red-gane-int
 
