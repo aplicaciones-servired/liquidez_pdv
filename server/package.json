@@ -1,27 +1,11 @@
 {
   "name": "server",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "tsc && node --env-file=.env ./dist/index.js",
-    "dev": "tsx watch --env-file=.env ./src/index.ts",
-    "build": "tsc"
-  },
-  "keywords": [],
   "author": "",
-  "license": "ISC",
-  "type": "module",
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5.9.2"
-  },
+  "main": "index.js",
   "dependencies": {
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "@types/morgan": "^1.9.10",
-    "@types/node": "^24.5.2",
     "cors": "^2.8.5",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
@@ -30,5 +14,19 @@
     "sequelize": "^6.37.7",
     "tsx": "^4.20.5",
     "zod": "^4.1.8"
-  }
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^24.5.2",
+    "typescript": "^5.9.2"
+  },
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "scripts": {
+    "start": "tsc && node --env-file=.env ./dist/index.js",
+    "dev": "tsx watch --env-file=.env ./src/index.ts",
+    "build": "tsc"
+  },
+  "type": "module"
 }
