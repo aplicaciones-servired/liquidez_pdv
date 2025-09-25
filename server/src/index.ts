@@ -3,7 +3,7 @@ import { PORT } from "./config.js";
 import express from "express";
 import log from "morgan";
 import cors from "cors";
-import { LiquidazionRoute } from "./routes/liquidazion.route.js";
+import { LiquidazionRoute } from "./routes/liquidazion.route";
 import dotenv from "dotenv";
 import corsMiddleware from "./config/corLiquidez.js";
 
