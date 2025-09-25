@@ -16,7 +16,7 @@ export const BrowserRouters = createBrowserRouter([
       },
       {
         path: '/dashboard',
-        element: <Suspense fallback={<div>Loading...</div>}><Dashboard datos={[]} /></Suspense>
+        element: <Suspense fallback={<div>Loading...</div>}><Dashboard /></Suspense>
       },
     ]
   }

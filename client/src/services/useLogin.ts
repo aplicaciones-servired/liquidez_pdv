@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { User } from "../interface/usuario.dt";
 import { FieldValues } from "react-hook-form";
-// import { LOGIN_URL } from '../utils/constans'
+import { LOGIN_URL } from "../utils/contanst";
 
 export function useLogin(): {
   errorString: string;
@@ -17,7 +17,8 @@ export function useLogin(): {
   const onSubmit = (data: FieldValues) => {
     // Retornamos la promesa
     return axios
-      .post("http://localhost:9010/api/v2/login", data)
+      //.post("http://localhost:9010/api/v2/login", data)
+      .post(`${LOGIN_URL}/login`, data)
       .then((res) => {
         console.log('res', res)
         const proceso = res.data.user.process;

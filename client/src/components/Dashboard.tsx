@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { BarChart } from '@mui/x-charts/BarChart'
 import { Liquidez } from '../interface/liquidez.dt'
 import { useEffect, useState } from 'react'
@@ -6,6 +5,7 @@ import { useAuth } from '../auth/AuthContext'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import { useFilter } from '../hook/InformeFilter'
+import { API_URL } from '../utils/contanst'
 
 export default function Graficas(): JSX.Element {
     const [data, setData] = useState<Liquidez[]>([])
@@ -15,11 +15,13 @@ export default function Graficas(): JSX.Element {
     useEffect(() => {
         const fetchData = async (): Promise<void> => {
             try {
-                const response = await axios.post(`http://localhost:5000/liquidazion`, {
-                    params: {
-                        zona: zona,
-                    },
-                })
+                const response = await axios
+                    //.post(`http://localhost:5000/liquidazion`, {
+                    .post(`${API_URL}/liquidazion`, {
+                        params: {
+                            zona: zona,
+                        },
+                    })
 
                 if (response.status === 200) {
                     const result = Array.isArray(response.data.datos) ? response.data.datos : [];

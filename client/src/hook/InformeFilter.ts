@@ -31,7 +31,7 @@ export function useFilter(pdv: Liquidez[]): FilterPDV {
 
     // Aquí podrías aplicar más filtros usando searchPDS
     return filtered
-  }, [pdv, searchPDV, searchPDS])
+  }, [pdv, searchPDV])
 
   return { searchPDV, searchPDS, setSearchPDV, setSearchPDS, filteredPDV }
 }

@@ -13,6 +13,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useFilters } from "../hook/useFilters";
+import { API_URL } from "../utils/contanst";
 
 export default function LiquidezForm({ zona }: { zona: string }): JSX.Element {
     const [data, setData] = useState<Liquidez[]>([]);
@@ -23,7 +24,9 @@ export default function LiquidezForm({ zona }: { zona: string }): JSX.Element {
     useEffect(() => {
         const fetchData = async (): Promise<void> => {
             try {
-                const response = await axios.post(`http://localhost:5000/liquidazion`, {
+                const response = await axios
+                //.post(`http://localhost:5000/liquidazion`, {
+                .post(`${API_URL}/liquidazion`,{   
                     params: {
                         zona: zona,
                     },

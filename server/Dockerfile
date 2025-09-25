@@ -10,7 +10,7 @@ COPY . .
 RUN yarn
 
 # Exponer el puerto
-EXPOSE 3000
+EXPOSE 5000
 
 # Comando para ejecutar la aplicación
 CMD ["bun", "start"]
