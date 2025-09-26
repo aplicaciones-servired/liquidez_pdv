@@ -3,35 +3,27 @@ import { Liquidez } from "../interface/liquidez.dt";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Box from "@mui/material/Box";
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useFilters } from "../hook/useFilters";
-import { API_URL } from "../utils/contanst";
+//import { API_URL } from "../utils/contanst";
 import CardForm from "./ui/Tablas";
 import Tables from "./ui/Tables";
+import LiquidezHoras from "./Hora";
 
 
 export default function LiquidezForm({ zona }: { zona: string }): JSX.Element {
     const [data, setData] = useState<Liquidez[]>([]);// guarda el item clicado
-    const { filteredProducts, searchLiquidez, setSearchLiquidez } = useFilters(data)
+    const { searchLiquidez, setSearchLiquidez, filteredLiquidez, searchDispositivo, setSearchDispositivo, searchPDV, setSearchPDV } = useFilters(data)
 
     useEffect(() => {
         const fetchData = async (): Promise<void> => {
             try {
                 const response =
-                //await axios.post(`http://localhost:5000/liquidazion/${zona}`);
-                await axios.post(`${API_URL}/liquidazion/${zona}`);
+                    await axios.post(`http://localhost:5000/liquidazion/${zona}`);
+                //await axios.post(`${API_URL}/liquidazion/${zona}`);
                 if (response.status === 200) {
                     setData(response.data.datos);
-                    toast.success(response.data.message, {
-                        autoClose: 2000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                    });
                 }
             } catch (error) {
                 const err = error as { response?: { data?: { message?: string } } };
@@ -57,17 +49,26 @@ export default function LiquidezForm({ zona }: { zona: string }): JSX.Element {
         return () => clearInterval(interval)
     }, [zona]);
 
-
     return (
         <>
-            <section className="justify-self-center">
-                <Box className="w-80 m-4 ">
-                    <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">Estado Liquidez</InputLabel>
+            <div className="bg-white mt-4  shadow-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.3)] rounded-xl p-4 mb-4">
+                <div className="flex justify-between">
+                    <h2 className="text-lg font-semibold mb-3">Filtros</h2>
+                    <h2 className="text-lg font-semibold mb-3">
+                        Última hora de actualización: <LiquidezHoras horazona={filteredLiquidez[0]} />
+                    </h2>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
+                    {/* Estado */}
+                    <div>
+
+                        <label className="block text-sm font-medium mb-1">Seecione el Estado</label>
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             label="Estado Liquidez"
+                            className="w-full border h-12 rounded-lg p-2"
                             value={searchLiquidez}
                             onChange={(e) => setSearchLiquidez(e.target.value)}
                         >
@@ -76,16 +77,43 @@ export default function LiquidezForm({ zona }: { zona: string }): JSX.Element {
                             <MenuItem value={'SOBREGIRADO'}>SOBREGIRADO</MenuItem>
                             <MenuItem value={'BAJA LIQUIDEZ'}>BAJA LIQUIDEZ</MenuItem>
                             <MenuItem value={'EXCESO DE EFECTIVO'}>EXCESO DE EFECTIVO</MenuItem>
+                        </Select>
+                    </div>
+                    {/* Dispositivo */}
+                    <div>
+                        <label className="block text-sm font-medium mb-1">Seecione el Dispositivo</label>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            label="Dispositivo"
+                            className="w-full h-12 border rounded-lg p-2"
+                            value={searchDispositivo}
+                            onChange={(e) => setSearchDispositivo(e.target.value)}
+                        >
+                            <MenuItem value={''}>TODOS</MenuItem>
+                            <MenuItem value={'PC'}>PC</MenuItem>
+                            <MenuItem value={'PDA'}>PDA</MenuItem>
 
                         </Select>
-                    </FormControl>
-                </Box>
-            </section>
+                    </div>
+                    {/* Punto de Venta */}
+                    <div>
+                        <label className="block text-sm font-medium mb-1">Punto de Venta</label>
+                        <input
+                            type="text"
+                            placeholder="Buscar punto de venta"
+                            className="w-full border rounded-lg p-2"
+                            value={searchPDV} onChange={(e) => setSearchPDV(e.target.value)}
+                        />
+                    </div>
+                </div>
+            </div>
+
 
             <Box display="flex" gap={1} className="w-full p-4">
                 {/* 📊 Tabla grande */}
                 <Box flex={2.5} minWidth="0">
-                    <CardForm items={filteredProducts} />
+                    <CardForm items={filteredLiquidez} />
                 </Box>
 
                 {/* 📈 Tablas laterales */}
@@ -93,7 +121,6 @@ export default function LiquidezForm({ zona }: { zona: string }): JSX.Element {
                     <Tables items={data} />
                 </Box>
             </Box>
-
 
 
         </>

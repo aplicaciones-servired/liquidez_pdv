@@ -106,3 +106,79 @@ export default function Tables({ items }: LiquidezTableProps) {
   );
 
 }
+
+
+// // card.tsx
+// import { useState } from "react";
+// import { Liquidez } from "../../interface/liquidez.dt";
+// import Card from "@mui/material/Card";
+// import CardContent from "@mui/material/CardContent";
+// import Typography from "@mui/material/Typography";
+// import CardActionArea from "@mui/material/CardActionArea";
+// import { getIconByEstado } from "./icons";
+// import CustomizedDialogs from "../LiquidezDalog";
+
+// type CardFormProps = {
+//   items: Liquidez[];
+// };
+
+// export function CardForm({ items }: CardFormProps) {
+//   const [selectedItem, setSelectedItem] = useState<Liquidez | null>(null);
+//   const [open, setOpen] = useState(false);
+
+//   return (
+//     <div className="flex justify-center flex-wrap gap-4 py-4 mt-4">
+//       {items.map((item, index) => (
+//         <Card
+//           key={index}
+//           component="div"
+//           className={`group text-center w-96 h-48 rounded-md border-2 transition-transform duration-300 hover:scale-105 hover:shadow-lg
+//             ${item.ESTADO_LIQUIDEZ === "BAJA LIQUIDEZ"
+//               ? "border-red-300"
+//               : item.ESTADO_LIQUIDEZ === "EXCESO DE EFECTIVO"
+//               ? "border-blue-400"
+//               : "border-green-400"} `}
+//           onClick={() => {
+//             setSelectedItem(item);
+//             setOpen(true);
+//           }}
+//         >
+//           <CardActionArea className="h-full">
+//             <CardContent
+//               className={`h-full flex flex-col items-center justify-center gap-2 bg-white transition-colors duration-300 
+//                 ${item.ESTADO_LIQUIDEZ === "BAJA LIQUIDEZ"
+//                   ? "group-hover:bg-red-50"
+//                   : item.ESTADO_LIQUIDEZ === "EXCESO DE EFECTIVO"
+//                   ? "group-hover:bg-blue-50"
+//                   : "group-hover:bg-green-50"} `}
+//             >
+//               <Typography variant="h6" className="font-bold">
+//                 {item.NOMBRE}
+//               </Typography>
+
+//               <Typography variant="body2" className="text-gray-600">
+//                 {item.FECHA} • {item.SUCURSAL}
+//               </Typography>
+
+//               <Typography variant="subtitle2" className="font-medium flex items-center gap-1">
+//                 {getIconByEstado(item.ESTADO_LIQUIDEZ)} {item.ESTADO_LIQUIDEZ}
+//               </Typography>
+
+//               <Typography variant="h6" className="font-bold text-gray-800">
+//                 {Number(item.LIQUIDEZ).toLocaleString("es-CO")}
+//               </Typography>
+//             </CardContent>
+//           </CardActionArea>
+//         </Card>
+//       ))}
+
+//       {open && (
+//         <CustomizedDialogs
+//           open={open}
+//           handleClose={() => setOpen(false)}
+//           item={selectedItem}
+//         />
+//       )}
+//     </div>
+//   );
+// }

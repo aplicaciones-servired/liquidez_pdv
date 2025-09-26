@@ -1,8 +1,4 @@
 export interface Liquidez {
-  cantidad_normal: number;
-  cantidad_exceso_efectivo: number;
-  cantidad_sobregirado: number;
-  cantidad_baja_liquidez: number;
   FECHA: string;
   ZONA: string;
   CCOSTO: string;
@@ -17,4 +13,9 @@ export interface Liquidez {
   HORA: number;
   LIQUIDEZ: string;
   ESTADO_LIQUIDEZ: string;
+}
+
+export interface LiquidezHora {
+  zona: string;
+  ultima_fecha: string;
 }

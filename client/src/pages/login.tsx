@@ -67,7 +67,7 @@ function LoginPage(): JSX.Element {
                             type='password'
                             id="password"
                             {...register('password')}
-                            placeholder='***********'
+                            placeholder='*****'
                             autoComplete="off"
                             className="w-72 h-8 rounded-full text-center bg-white"
                         />

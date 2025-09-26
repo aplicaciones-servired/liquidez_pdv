@@ -37,9 +37,7 @@ function NavBar(): JSX.Element {
       <nav>
         <ul className="flex gap-8 text-xl m-0 p-0 list-none">
           {Links.map((link, index) => (
-            <li key={index}>
-              <LinkComponent key={index} link={link.link} name={link.name}/>
-            </li>
+            <LinkComponent key={index} link={link.link} name={link.name} />
           ))}
         </ul>
       </nav>

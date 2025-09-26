@@ -15,20 +15,13 @@ export default function Graficas(): JSX.Element {
     useEffect(() => {
         const fetchData = async (): Promise<void> => {
             try {
-                const response = 
-                //await axios.post(`http://localhost:5000/liquidazion/${zona}`);
-                await axios.post(`${API_URL}/liquidazion/${zona}`);
+                const response =
+                    await axios.post(`http://localhost:5000/liquidazion/${zona}`);
+                //await axios.post(`${API_URL}/liquidazion/${zona}`);
 
                 if (response.status === 200) {
                     const result = Array.isArray(response.data.datos) ? response.data.datos : [];
                     setData(result);
-                    toast.success(response.data.message || "Datos cargados", {
-                        autoClose: 2000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                    });
                 }
             } catch (error) {
                 const err = error as { response?: { data?: { message?: string } } }
