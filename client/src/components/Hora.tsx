@@ -3,14 +3,16 @@ import { Liquidez, LiquidezHora } from "../interface/liquidez.dt";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Empresa } from "./ui/Empresa";
+import { API_URL } from "../utils/contanst";
 
-export default function LiquidezHoras({ horazona }: { horazona?: Liquidez }): JSX.Element {
+export default function UlltimaHora({ horazona }: { horazona?: Liquidez }): JSX.Element {
     const [hora, setHora] = useState<LiquidezHora[]>([]);
 
     useEffect(() => {
         const fetchData = async (): Promise<void> => {
             try {
-                const response = await axios.get(`http://localhost:5000/Horaliquidez`);
+                //const response = await axios.get(`http://localhost:5000/Horaliquidez`);
+                const response = await axios.get(`${API_URL}/Horaliquidez`);
                 if (response.status === 200) {
                     setHora(response.data.datos);
                 }

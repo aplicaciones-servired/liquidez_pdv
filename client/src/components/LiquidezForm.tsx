@@ -6,10 +6,10 @@ import Box from "@mui/material/Box";
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import { useFilters } from "../hook/useFilters";
-//import { API_URL } from "../utils/contanst";
+import { API_URL } from "../utils/contanst";
 import CardForm from "./ui/Tablas";
 import Tables from "./ui/Tables";
-import LiquidezHoras from "./Hora";
+import UlltimaHora from "./Hora";
 
 
 export default function LiquidezForm({ zona }: { zona: string }): JSX.Element {
@@ -20,8 +20,8 @@ export default function LiquidezForm({ zona }: { zona: string }): JSX.Element {
         const fetchData = async (): Promise<void> => {
             try {
                 const response =
-                    await axios.post(`http://localhost:5000/liquidazion/${zona}`);
-                //await axios.post(`${API_URL}/liquidazion/${zona}`);
+                //await axios.post(`http://localhost:5000/liquidazion/${zona}`);
+                await axios.post(`${API_URL}/liquidazion/${zona}`);
                 if (response.status === 200) {
                     setData(response.data.datos);
                 }
@@ -54,8 +54,8 @@ export default function LiquidezForm({ zona }: { zona: string }): JSX.Element {
             <div className="bg-white mt-4  shadow-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.3)] rounded-xl p-4 mb-4">
                 <div className="flex justify-between">
                     <h2 className="text-lg font-semibold mb-3">Filtros</h2>
-                    <h2 className="text-lg font-semibold mb-3">
-                        Última hora de actualización: <LiquidezHoras horazona={filteredLiquidez[0]} />
+                    <h2 className="text-lg font-semibold mb-3 text-red-600">
+                        Última hora de actualización: <UlltimaHora horazona={filteredLiquidez[0]} />
                     </h2>
                 </div>
 
