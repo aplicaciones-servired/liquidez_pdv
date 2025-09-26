@@ -53,7 +53,7 @@ export const AuthProvider = ({ children }: Props): JSX.Element => {
     clearTimeout(inactivityTimer)
     inactivityTimer = setTimeout(() => {
       logout()
-    }, 10 * 60 * 1000)
+    }, 60 * 60 * 1000)
   }
 
   useEffect(() => {
