@@ -40,7 +40,7 @@ export default function Tables({ items }: LiquidezTableProps) {
     () =>
       [...items]
         .filter(
-          (i) => normalize(i.ESTADO_LIQUIDEZ) !== "exceso de efectivo" && normalize(i.ESTADO_LIQUIDEZ) !== "sobregirado" && normalize(i.ESTADO_LIQUIDEZ) !== "normal"
+          (i) => normalize(i.ESTADO_LIQUIDEZ) === "baja liquidez"
         )
         .sort((a, b) => parseLiquidez(a.LIQUIDEZ) - parseLiquidez(b.LIQUIDEZ))
         .slice(0, 5),
