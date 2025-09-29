@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import { getIconByEstado } from "./ui/icons";
 import { useState, useEffect } from 'react';
 import { ToLiquidez } from "../interface/liquidez.dt";
+import { Empresa } from "./ui/Empresa";
 import { API_URL } from "../utils/contanst";
 
 export default function TotalLiquidez({ zona }: { zona: string }): JSX.Element {
@@ -68,7 +69,7 @@ export default function TotalLiquidez({ zona }: { zona: string }): JSX.Element {
                     <TableBody>
                         {data.map((row, i) => (
                             <TableRow key={i}>
-                                <TableCell>{row.ZONA}</TableCell>
+                                <TableCell>{Empresa(row.ZONA)}</TableCell>
                                 <TableCell align="center">
                                     {getIconByEstado(row.ESTADO_LIQUIDEZ)} {row.ESTADO_LIQUIDEZ}
                                 </TableCell>
