@@ -11,8 +11,8 @@ export default function UlltimaHora({ horazona }: { horazona?: Liquidez }): JSX.
     useEffect(() => {
         const fetchData = async (): Promise<void> => {
             try {
-                const response = await axios.get(`http://localhost:5000/Horaliquidez`);
-                //const response = await axios.get(`${API_URL}/Horaliquidez`);
+                //const response = await axios.get(`http://localhost:5000/Horaliquidez`);
+                const response = await axios.get(`${API_URL}/Horaliquidez`);
                 if (response.status === 200) {
                     setHora(response.data.datos);
                 }
