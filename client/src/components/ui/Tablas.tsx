@@ -180,7 +180,7 @@ export default function LiquidezTable({ items }: LiquidezTableProps) {
                       {getIconByEstado(row.ESTADO_LIQUIDEZ)} {row.ESTADO_LIQUIDEZ}
                     </TableCell>
                     <TableCell align="center" sx={{ fontWeight: "bold" }}>
-                      {row.LIQUIDEZ}
+                      {Number(row.LIQUIDEZ).toLocaleString("es-CO")}
                     </TableCell>
                   </TableRow>
                 ))}

@@ -19,3 +19,10 @@ export interface LiquidezHora {
   zona: string;
   ultima_fecha: string;
 }
+
+export interface ToLiquidez {
+    ZONA:            string;
+    ESTADO_LIQUIDEZ: string;
+    TOTAL_PDV:       number;
+    PORCENTAJE:      string;
+}

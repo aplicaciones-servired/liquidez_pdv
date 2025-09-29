@@ -8,9 +8,7 @@ export const getLiquidez = async (
 ): Promise<void> => {
   const data = req.params;
   const { zona } = data;
-  console.log('first', zona)
   const empresa = zona === "Servired" ? "39628" : "39627";
-  console.log("first", empresa);
   try {
     const Liquidez = await LiquidacionModel.findAll({
       attributes: [

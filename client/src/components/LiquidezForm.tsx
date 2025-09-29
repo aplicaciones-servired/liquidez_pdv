@@ -10,6 +10,7 @@ import { API_URL } from "../utils/contanst";
 import CardForm from "./ui/Tablas";
 import Tables from "./ui/Tables";
 import UlltimaHora from "./Hora";
+import TotalLiquidez from "./TotalLiquidez";
 
 
 export default function LiquidezForm({ zona }: { zona: string }): JSX.Element {
@@ -116,13 +117,11 @@ export default function LiquidezForm({ zona }: { zona: string }): JSX.Element {
                     <CardForm items={filteredLiquidez} />
                 </Box>
 
-                {/* 📈 Tablas laterales */}
-                <Box flex={1.2} display="flex" flexDirection="column" gap={2}>
+                 <Box flex={1.2} display="flex" flexDirection="column" gap={2}>
+                    <TotalLiquidez zona={zona} />
                     <Tables items={data} />
                 </Box>
             </Box>
-
-
         </>
     );
 }

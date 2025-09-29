@@ -69,7 +69,7 @@ export default function Tables({ items }: LiquidezTableProps) {
                 <TableCell align="center">
                   {getIconByEstado(row.ESTADO_LIQUIDEZ)} {row.ESTADO_LIQUIDEZ}
                 </TableCell>
-                <TableCell align="center">{row.LIQUIDEZ}</TableCell>
+                <TableCell align="center">{Number(row.LIQUIDEZ).toLocaleString("es-CO")}</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -96,7 +96,7 @@ export default function Tables({ items }: LiquidezTableProps) {
                 <TableCell align="center">
                   {getIconByEstado(row.ESTADO_LIQUIDEZ)} {row.ESTADO_LIQUIDEZ}
                 </TableCell>
-                <TableCell align="center">{row.LIQUIDEZ}</TableCell>
+                <TableCell align="center">{Number(row.LIQUIDEZ).toLocaleString("es-CO")}</TableCell>
               </TableRow>
             ))}
           </TableBody>
