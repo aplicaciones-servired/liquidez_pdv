@@ -11,11 +11,16 @@ import CardForm from "./ui/Tablas";
 import Tables from "./ui/Tables";
 import UlltimaHora from "./Hora";
 import TotalLiquidez from "./TotalLiquidez";
+import { useAuth } from "../auth/AuthContext";
 
 
 export default function LiquidezForm({ zona }: { zona: string }): JSX.Element {
     const [data, setData] = useState<Liquidez[]>([]);// guarda el item clicado
-    const { searchLiquidez, setSearchLiquidez, filteredLiquidez, searchDispositivo, setSearchDispositivo, searchPDV, setSearchPDV } = useFilters(data)
+    const { searchLiquidez, setSearchLiquidez, filteredLiquidez, searchDispositivo, setSearchDispositivo, searchPDV, setSearchPDV, setCentroc, centroc } = useFilters(data)
+
+    const { username } = useAuth()
+
+    const empresa = username.company
 
     useEffect(() => {
         const fetchData = async (): Promise<void> => {
@@ -49,6 +54,7 @@ export default function LiquidezForm({ zona }: { zona: string }): JSX.Element {
         return () => clearInterval(interval)
     }, [zona]);
 
+
     return (
         <>
             <div className="bg-white mt-4  shadow-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.3)] rounded-xl p-4 mb-4">
@@ -63,7 +69,7 @@ export default function LiquidezForm({ zona }: { zona: string }): JSX.Element {
                     {/* Estado */}
                     <div>
 
-                        <label className="block text-sm font-medium mb-1">Seecione el Estado</label>
+                        <label className="block text-sm font-medium mb-1">Selecione el Estado</label>
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
@@ -71,8 +77,12 @@ export default function LiquidezForm({ zona }: { zona: string }): JSX.Element {
                             className="w-full border h-12 rounded-lg p-2"
                             value={searchLiquidez}
                             onChange={(e) => setSearchLiquidez(e.target.value)}
+                            displayEmpty
                         >
-                            <MenuItem value={''}>TODOS</MenuItem>
+                            <MenuItem value="">
+                                <em>Todos</em>
+                            </MenuItem>
+
                             <MenuItem value={'NORMAL'}>NORMAL</MenuItem>
                             <MenuItem value={'SOBREGIRADO'}>SOBREGIRADO</MenuItem>
                             <MenuItem value={'BAJA LIQUIDEZ'}>BAJA LIQUIDEZ</MenuItem>
@@ -81,7 +91,7 @@ export default function LiquidezForm({ zona }: { zona: string }): JSX.Element {
                     </div>
                     {/* Dispositivo */}
                     <div>
-                        <label className="block text-sm font-medium mb-1">Seecione el Dispositivo</label>
+                        <label className="block text-sm font-medium mb-1">Selecione el Dispositivo</label>
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
@@ -89,13 +99,44 @@ export default function LiquidezForm({ zona }: { zona: string }): JSX.Element {
                             className="w-full h-12 border rounded-lg p-2"
                             value={searchDispositivo}
                             onChange={(e) => setSearchDispositivo(e.target.value)}
+                            displayEmpty
                         >
-                            <MenuItem value={''}>TODOS</MenuItem>
+                            <MenuItem value="">
+                                <em>Todos</em>
+                            </MenuItem>
+
                             <MenuItem value={'PC'}>PC</MenuItem>
                             <MenuItem value={'PDA'}>PDA</MenuItem>
 
                         </Select>
                     </div>
+                    {/*centro de constos */}
+                    {empresa === "Multired" && (
+                        <div>
+                            <label className="block text-sm font-medium mb-1">
+                                Seleccione el centro de costos
+                            </label>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                label="Dispositivo"
+                                className="w-full h-12 border rounded-lg p-2"
+                                value={centroc}
+                                onChange={(e) => setCentroc(e.target.value)}
+                                displayEmpty
+                            >
+                                <MenuItem value="">
+                                    <em>Todos</em>
+                                </MenuItem>
+
+                                {/* Opciones reales */}
+                                <MenuItem value={"39629"}>Yumbo</MenuItem>
+                                <MenuItem value={"39630"}>Vijes</MenuItem>
+                                <MenuItem value={"39631"}>La Cumbre</MenuItem>
+                            </Select>
+                        </div>
+                    )}
+
                     {/* Punto de Venta */}
                     <div>
                         <label className="block text-sm font-medium mb-1">Punto de Venta</label>
@@ -116,7 +157,7 @@ export default function LiquidezForm({ zona }: { zona: string }): JSX.Element {
                     <CardForm items={filteredLiquidez} />
                 </Box>
 
-                 <Box flex={1} display="flex" flexDirection="column" gap={1}>
+                <Box flex={1} display="flex" flexDirection="column" gap={1}>
                     <TotalLiquidez zona={zona} />
                     <Tables items={data} />
                 </Box>

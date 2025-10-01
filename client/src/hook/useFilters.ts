@@ -5,6 +5,8 @@ export function useFilters(data: Liquidez[]) {
   const [searchLiquidez, setSearchLiquidez] = useState<string>("");
   const [searchDispositivo, setSearchDispositivo] = useState<string>("");
   const [searchPDV, setSearchPDV] = useState<string>("");
+  const [centroc, setCentroc] = useState<string>("");
+
 
   const filteredLiquidez = useMemo(() => {
     return data.filter(
@@ -19,8 +21,12 @@ export function useFilters(data: Liquidez[]) {
         product.NOMBRE.toLowerCase().includes(
           searchPDV.toLowerCase()
         )
+        &&
+        product.CCOSTO.toLowerCase().includes(
+          centroc.toLowerCase()
+        )
     );
-  }, [data, searchLiquidez, searchDispositivo, searchPDV]);
+  }, [data, searchLiquidez, searchDispositivo, searchPDV, centroc]);
 
   return {
     filteredLiquidez,
@@ -29,6 +35,8 @@ export function useFilters(data: Liquidez[]) {
     searchDispositivo,
     setSearchDispositivo,
     setSearchPDV,
-    searchPDV
+    searchPDV,
+    centroc,
+    setCentroc
   };
 }
