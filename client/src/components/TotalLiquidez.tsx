@@ -20,9 +20,8 @@ export default function TotalLiquidez({ zona }: { zona: string }): JSX.Element {
     useEffect(() => {
         const fetchData = async (): Promise<void> => {
             try {
-                const response =
-                //await axios.post(`http://localhost:5000/Totalliquidez/${zona}`);
-                await axios.post(`${API_URL}/Totalliquidez/${zona}`);
+                //const response = await axios.post(`http://localhost:5000/Totalliquidez/${zona}`);
+                const response =  await axios.post(`${API_URL}/Totalliquidez/${zona}`);
                 if (response.status === 200) {
                     setData(response.data.datos);
                 }

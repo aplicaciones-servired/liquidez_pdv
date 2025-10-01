@@ -6,6 +6,8 @@ import {
 } from "sequelize";
 import dbLiquidez from "../db/dbLiquidez";
 import SucursalModel from "./sucursales.model";
+import VendedoresModel from "./vendedores.model";
+import Serviciosmodel from "./servicios.model";
 
 class HoraModel extends Model<
   InferAttributes<HoraModel>,
@@ -54,6 +56,18 @@ HoraModel.belongsTo(SucursalModel, {
   foreignKey: "SUCURSAL",
   targetKey: "CODIGO",
   as: "Sucursal",
+});
+
+HoraModel.belongsTo(VendedoresModel, {
+  foreignKey: "PERSONA",
+  targetKey: "DOCUMENTO",
+  as: "Vendedor",
+});
+
+HoraModel.belongsTo(Serviciosmodel, {
+  foreignKey: "SERVICIO",
+  targetKey: "CODIGO",
+  as: "Servicio",
 });
 
 export default HoraModel;

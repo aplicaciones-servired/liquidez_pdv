@@ -17,9 +17,8 @@ export function useLogin(): {
   const onSubmit = (data: FieldValues) => {
     // Retornamos la promesa
     return (
-      axios
-        //.post("http://localhost:9010/api/v2/login", data)
-        .post(`${LOGIN_URL}/login`, data)
+      //axios.post("http://localhost:9010/api/v2/login", data)
+      axios.post(`${LOGIN_URL}/login`, data)
         .then((res) => {
           console.log("res", res);
           login();

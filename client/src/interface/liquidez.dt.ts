@@ -21,8 +21,16 @@ export interface LiquidezHora {
 }
 
 export interface ToLiquidez {
-    ZONA:            string;
-    ESTADO_LIQUIDEZ: string;
-    TOTAL_PDV:       number;
-    PORCENTAJE:      string;
+  ZONA: string;
+  ESTADO_LIQUIDEZ: string;
+  TOTAL_PDV: number;
+  PORCENTAJE: string;
+}
+
+export interface DetalleLiquidez {
+  FECHA: string;
+  SUCURSAL: string;
+  CATEGORIACOMERCIAL: string;
+  ING: string;
+  EGR: string;
 }

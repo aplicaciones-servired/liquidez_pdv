@@ -20,9 +20,8 @@ export default function LiquidezForm({ zona }: { zona: string }): JSX.Element {
     useEffect(() => {
         const fetchData = async (): Promise<void> => {
             try {
-                const response =
-                //await axios.post(`http://localhost:5000/liquidazion/${zona}`);
-                await axios.post(`${API_URL}/liquidazion/${zona}`);
+                //const response = await axios.post(`http://localhost:5000/liquidazion/${zona}`);
+                const response = await axios.post(`${API_URL}/liquidazion/${zona}`);
                 if (response.status === 200) {
                     setData(response.data.datos);
                 }
@@ -117,7 +116,7 @@ export default function LiquidezForm({ zona }: { zona: string }): JSX.Element {
                     <CardForm items={filteredLiquidez} />
                 </Box>
 
-                 <Box flex={1.2} display="flex" flexDirection="column" gap={2}>
+                 <Box flex={1} display="flex" flexDirection="column" gap={1}>
                     <TotalLiquidez zona={zona} />
                     <Tables items={data} />
                 </Box>

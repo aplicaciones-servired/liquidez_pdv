@@ -70,6 +70,7 @@ interface HeadCell {
 
 const headCells: readonly HeadCell[] = [
   { id: "FECHA", label: "Fecha", sortable: false },
+  { id: "SUCURSAL", label: "Sucursal", sortable: false },
   { id: "ZONA", label: "Zona", sortable: false },
   { id: "CCOSTO", label: "CCosto", sortable: false },
   { id: "DISPOSITIVO", label: "Dispositivo", sortable: false },
@@ -172,6 +173,7 @@ export default function LiquidezTable({ items }: LiquidezTableProps) {
                     
                   >
                     <TableCell>{row.FECHA}</TableCell>
+                      <TableCell>{row.SUCURSAL}</TableCell>
                     <TableCell>{Empresa(row.ZONA)}</TableCell>
                     <TableCell>{CentroCosto(row.CCOSTO)}</TableCell>
                     <TableCell>{row.DISPOSITIVO}</TableCell>
@@ -191,7 +193,7 @@ export default function LiquidezTable({ items }: LiquidezTableProps) {
       </Box>
 
       {open && (
-        <CustomizedDialogs open={open} handleClose={() => setOpen(false)} item={selectedItem} />
+        <CustomizedDialogs open={open} handleClose={() => setOpen(false)} sucursal={selectedItem?.SUCURSAL ?? null}  />
       )}
     </div>
   );

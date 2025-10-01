@@ -16,7 +16,7 @@ const parseLiquidez = (value: unknown) => {
   return parseFloat(String(value).replace(/[^0-9.-]+/g, "")) || 0;
 };
 
-const normalize = (value: string) => value?.toLowerCase().trim();
+const normalize = (value: string ) => value?.toLowerCase().trim();
 
 type LiquidezTableProps = {
   items: Liquidez[];
@@ -40,7 +40,7 @@ export default function Tables({ items }: LiquidezTableProps) {
     () =>
       [...items]
         .filter(
-          (i) => normalize(i.ESTADO_LIQUIDEZ) === "baja liquidez"
+          (i) => normalize(i.ESTADO_LIQUIDEZ) === "baja liquidez" && parseLiquidez(i.LIQUIDEZ) !== 0
         )
         .sort((a, b) => parseLiquidez(a.LIQUIDEZ) - parseLiquidez(b.LIQUIDEZ))
         .slice(0, 5),
