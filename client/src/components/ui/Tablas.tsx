@@ -170,7 +170,7 @@ export default function LiquidezTable({ items }: LiquidezTableProps) {
                       setSelectedItem(row);
                       setOpen(true);
                     }}
-                    
+                    sx={{ cursor: "pointer" }}
                   >
                     <TableCell>{row.FECHA}</TableCell>
                       <TableCell>{row.SUCURSAL}</TableCell>
