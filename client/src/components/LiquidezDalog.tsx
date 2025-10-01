@@ -82,7 +82,7 @@ export default function CustomizedDialogs({
             maxWidth="md"
         >
             <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title" className={'text-center'}>
-                DETALLE PUNTO DEL VENTA {sucursal} DIA {detalles[0]?.FECHA}
+                DETALLE DEL PUNTO VENTA {sucursal} DIA {detalles[0]?.FECHA}
             </DialogTitle>
             <IconButton
                 aria-label="close"
