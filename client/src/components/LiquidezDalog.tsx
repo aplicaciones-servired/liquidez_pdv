@@ -3,14 +3,18 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 import type { DetalleLiquidez } from "../interface/liquidez.dt";
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { API_URL } from '../utils/contanst';
-
 
 interface ItemProps {
     estado: string;
@@ -75,10 +79,10 @@ export default function CustomizedDialogs({
             aria-labelledby="customized-dialog-title"
             open={open}
             fullWidth
-            maxWidth="xl"
+            maxWidth="md"
         >
             <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title" className={'text-center'}>
-                DETALLE PUNTO DE VENTA
+                DETALLE PUNTO DEL VENTA {sucursal} DIA {detalles[0]?.FECHA}
             </DialogTitle>
             <IconButton
                 aria-label="close"
@@ -94,29 +98,33 @@ export default function CustomizedDialogs({
             </IconButton>
 
             <DialogContent dividers>
-                {detalles.map((row, index) => (
-                    <Box sx={{ flexGrow: 1 }} key={index}>
-                        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 } }
-                            className={"mb-4 flex justify-center flex-wrap"}>
-                            <Grid size={3}>
-                                <label htmlFor="FECHA">FECHA  <Item estado={row.FECHA}>{row.FECHA}</Item></label>
-                            </Grid>
-                            <Grid size={3}>
-                                <label htmlFor="SUCURSAL">SUCURSAL  <Item estado={row?.SUCURSAL}>{row.SUCURSAL}</Item></label>
-                            </Grid>
-                            <Grid size={3}>
-                                <label htmlFor="CATEGORIA COMERCIAL">CATEGORIA COMERCIAL  <Item estado={row.CATEGORIACOMERCIAL}>{row.CATEGORIACOMERCIAL}</Item></label>
-                            </Grid>
-                            <Grid size={3}>
-                                <label htmlFor="INGRESO">INGRESO  <Item estado={row.ING}>{Number(row.ING).toLocaleString("es-CO")}</Item></label>
-                            </Grid>
-                            <Grid size={3}>
-                                <label htmlFor="EGRESO">EGRESO  <Item estado={row.EGR}>{Number(row.EGR).toLocaleString("es-CO")}</Item></label>
-                            </Grid>
-                        </Grid>
-                    </Box>
-
-                ))}
+                <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 500 }} aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell align="center">CATEGORIA COMERCIAL</TableCell>
+                                <TableCell align="center">INGRESO</TableCell>
+                                <TableCell align="center">EGRESO</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {detalles.map((row, index) => (
+                                <TableRow
+                                    key={index}
+                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                >
+                                    <TableCell align="center">
+                                        {row.CATEGORIACOMERCIAL}
+                                    </TableCell>
+                                    <TableCell align="center">
+                                        {Number(row.ING).toLocaleString("es-CO")}
+                                    </TableCell>
+                                    <TableCell align="center">{Number(row.EGR).toLocaleString("es-CO")}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
             </DialogContent>
         </Dialog>
     );
