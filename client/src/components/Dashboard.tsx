@@ -15,99 +15,83 @@ export default function Graficas(): JSX.Element {
     useEffect(() => {
         const fetchData = async (): Promise<void> => {
             try {
-                const response =
-                //await axios.post(`http://localhost:5000/liquidazion/${zona}`);
-                await axios.post(`${API_URL}/liquidazion/${zona}`);
-
+                const response = await axios.post(`${API_URL}/liquidazion/${zona}`)
                 if (response.status === 200) {
-                    const result = Array.isArray(response.data.datos) ? response.data.datos : [];
-                    setData(result);
+                    const result = Array.isArray(response.data.datos) ? response.data.datos : []
+                    setData(result)
                 }
             } catch (error) {
                 const err = error as { response?: { data?: { message?: string } } }
                 const msg = err.response?.data?.message || 'Error desconocido'
-                toast.error(msg, {
-                    autoClose: 2000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                })
+                toast.error(msg, { autoClose: 2000 })
             }
         }
+
         void fetchData()
-
-        // Ejecutar cada 1 minuto (60000 ms)
-        const interval = setInterval(() => {
-            void fetchData()
-        }, 60000)
-
-        // Limpiar al desmontar
+        const interval = setInterval(() => void fetchData(), 60000)
         return () => clearInterval(interval)
     }, [zona])
 
-    // BarChart: agrupado por grupo de categorías
     const { filteredPDV } = useFilter(data)
 
-    const categories = [
-        'BRONCE',
-        'DIAMANTE1A',
-        'DIAMANTE2A',
-        'DIAMANTE3A',
-        'DIAMANTE4A',
-        'ORO',
-        'PLATA',
-        'ZAFIRO'
-    ];
+    const categories = ['BRONCE', 'DIAMANTE1A', 'DIAMANTE2A', 'DIAMANTE3A', 'DIAMANTE4A', 'ORO', 'PLATA', 'ZAFIRO']
+    const estados = ['BAJA LIQUIDEZ', 'NORMAL', 'SOBREGIRADO', 'EXCESO DE EFECTIVO']
 
-    const estados = ['BAJA LIQUIDEZ', 'NORMAL', 'SOBREGIRADO', 'EXCESO DE EFECTIVO'];
+    const counts = categories.map(category => estados.map(estado =>
+        filteredPDV.filter((pdv: { CATEGORIA: string, ESTADO_LIQUIDEZ: string }) => pdv.CATEGORIA === category && pdv.ESTADO_LIQUIDEZ === estado).length
+    ))
 
-    const counts = categories.map(category => {
-        return estados.map(estado => {
-            return filteredPDV.filter(
-                (pdv: { CATEGORIA: string, ESTADO_LIQUIDEZ: string }) =>
-                    pdv.CATEGORIA === category && pdv.ESTADO_LIQUIDEZ === estado
-            ).length;
-        });
-    });
+    const totalPDV = counts.flat().reduce((s, v) => s + v, 0)
+    const estadoTotals = estados.map((_, idx) => counts.reduce((s, row) => s + row[idx], 0))
 
-    // Definir el tipo de colors
     const colors: { [key: string]: string } = {
-        'BAJA LIQUIDEZ': '#FF5733', // Rojo
-        'NORMAL': '#28A745',        // Verde
-        'SOBREGIRADO': '#FFC107',   // Amarillo
-        'EXCESO DE EFECTIVO': '#007BFF' // Azul
-    };
+        'BAJA LIQUIDEZ': '#ef4444',
+        'NORMAL': '#10b981',
+        'SOBREGIRADO': '#f59e0b',
+        'EXCESO DE EFECTIVO': '#3b82f6'
+    }
 
     return (
-        <section className="flex flex-wrap justify-center gap-6 my-6">
-            <BarChart
-                xAxis={[
-                    {
-                        id: 'categorias',
-                        data: categories,
-                        scaleType: 'band'
-                    }
-                ]}
-                series={estados.map((estado, index) => ({
-                    label: estado,
-                    data: counts.map(count => count[index]),
-                    color: colors[estado],
-                    stack: 'total' // ← ESTA ES LA CLAVE: hace que las barras se apilen
-                }))}
-                height={400}
-                width={800}
-                borderRadius={23}
-                slotProps={{
-                    legend: {
-                        direction: 'horizontal', // en lugar de 'row'
-                        position: {
-                            vertical: 'bottom',
-                            horizontal: 'center' // en lugar de 'middle'
-                        },
-                    },
-                }}
-            />
+        <section className="mx-auto w-full max-w-[1200px]">
+            <header className="mb-6 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                        <h3 className="text-lg font-bold text-slate-900">Dashboard de Liquidez</h3>
+                        <p className="text-sm text-slate-600">Resumen por categoría y estado</p>
+                    </div>
+
+                    <div className="mt-2 flex gap-3 sm:mt-0">
+                        <div className="flex items-center gap-3 rounded-lg bg-slate-50 px-4 py-2">
+                            <div className="text-sm text-slate-500">Total PDV</div>
+                            <div className="text-xl font-bold text-slate-900">{totalPDV}</div>
+                        </div>
+
+                        {estados.map((e, i) => (
+                            <div key={e} className="flex items-center gap-3 rounded-lg bg-slate-50 px-4 py-2">
+                                <div className="h-3 w-3 rounded-full" style={{ background: colors[e] }} />
+                                <div className="text-sm text-slate-600">{e}</div>
+                                <div className="ml-2 font-semibold text-slate-900">{estadoTotals[i]}</div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </header>
+
+            <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                <BarChart
+                    xAxis={[{ id: 'categorias', data: categories, scaleType: 'band' }]}
+                    series={estados.map((estado, index) => ({
+                        label: estado,
+                        data: counts.map(count => count[index]),
+                        color: colors[estado],
+                        stack: 'total'
+                    }))}
+                    height={420}
+                    width={900}
+                    borderRadius={12}
+                    slotProps={{ legend: { direction: 'horizontal', position: { vertical: 'bottom', horizontal: 'center' } } }}
+                />
+            </div>
         </section>
     )
 }

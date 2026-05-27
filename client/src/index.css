@@ -1,1 +1,18 @@
 @import "tailwindcss";
+
+@layer base {
+	html {
+		color-scheme: light;
+	}
+
+	body {
+		background: #f8fafc;
+		color: #0f172a;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	#root {
+		min-height: 100vh;
+	}
+}

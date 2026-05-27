@@ -17,6 +17,11 @@ import { API_URL } from "../utils/contanst";
 export default function TotalLiquidez({ zona }: { zona: string }): JSX.Element {
     const [data, setData] = useState<ToLiquidez[]>([]);
 
+    const formatNumber = (value: unknown): string => {
+        const parsed = Number(String(value ?? 0).replace(/[^0-9.-]+/g, ""));
+        return Number.isFinite(parsed) ? parsed.toLocaleString("es-CO") : "0";
+    };
+
     useEffect(() => {
         const fetchData = async (): Promise<void> => {
             try {
@@ -52,11 +57,11 @@ export default function TotalLiquidez({ zona }: { zona: string }): JSX.Element {
     return (
         <Box display="flex" flexDirection="column" gap={2} flex={1}>
             {/* 🔹 Top 5 Exceso de Efectivo */}
-            <Paper className="border-1 border-blue-500 rounded-2xl w-full ">
-                <Typography variant="h6" sx={{ p: 2 }}>
+            <Paper className="w-full rounded-2xl border border-slate-200 bg-white shadow-sm">
+                <Typography variant="h6" sx={{ p: 2, color: '#0f172a', fontWeight: 700 }}>
                     TOTAL PDV
                 </Typography>
-                <Table size="small">
+                <Table size="small" sx={{ '& .MuiTableCell-root': { borderColor: '#e2e8f0', color: '#0f172a' } }}>
                     <TableHead>
                         <TableRow>
                             <TableCell>Zona</TableCell>
@@ -72,8 +77,8 @@ export default function TotalLiquidez({ zona }: { zona: string }): JSX.Element {
                                 <TableCell align="center">
                                     {getIconByEstado(row.ESTADO_LIQUIDEZ)} {row.ESTADO_LIQUIDEZ}
                                 </TableCell>
-                                <TableCell>{row.TOTAL_PDV}</TableCell>
-                                <TableCell align="center">{Number(row.PORCENTAJE).toLocaleString("es-CO")}</TableCell>
+                                <TableCell>{formatNumber(row.TOTAL_PDV)}</TableCell>
+                                <TableCell align="center">{formatNumber(row.PORCENTAJE)}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

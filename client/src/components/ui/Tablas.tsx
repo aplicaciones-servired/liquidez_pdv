@@ -149,13 +149,13 @@ export default function LiquidezTable({ items }: LiquidezTableProps) {
 
   return (
     <div>
-      <Box display="flex" flexDirection="column" gap={2} flex={1} className="border-1 border-gray-500  rounded-2xl w-11/12">
-        <Paper sx={{ width: "100%", mb: 2, overflowX: "hidden" }}>
-          <Typography variant="h6" sx={{ p: 2 }}>
+      <Box display="flex" flexDirection="column" gap={2} flex={1} className="w-11/12 rounded-2xl border border-slate-200 bg-white">
+        <Paper sx={{ width: "100%", mb: 2, overflowX: "hidden", borderRadius: 4, boxShadow: '0 1px 8px rgba(15,23,42,0.06)' }}>
+          <Typography variant="h6" sx={{ p: 2, color: '#0f172a', fontWeight: 700 }}>
             Liquidez
           </Typography>
           <TableContainer sx={{ maxHeight: 600 }}>
-            <Table stickyHeader aria-labelledby="tableTitle">
+            <Table stickyHeader aria-labelledby="tableTitle" sx={{ '& .MuiTableCell-root': { borderColor: '#e2e8f0', color: '#0f172a' } }}>
               <EnhancedTableHead
                 order={order}
                 orderBy={String(orderBy)}

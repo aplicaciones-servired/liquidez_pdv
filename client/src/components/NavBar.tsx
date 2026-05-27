@@ -26,7 +26,7 @@ function NavBar(): JSX.Element {
   return (
     <Box
       role="presentation"
-      className="flex items-center justify-between bg-blue-200 py-3 px-8 rounded-lg h-20"
+      className="flex h-20 items-center justify-between rounded-2xl border border-slate-200 bg-white/90 px-8 py-3 shadow-sm backdrop-blur"
     >
       {/* Logo a la izquierda */}
       <figure className='flex items-center'>
@@ -42,21 +42,16 @@ function NavBar(): JSX.Element {
         </ul>
       </nav>
 
-      {/* Cerrar sesión a la derecha */}
-      <Box className="rounded-lg hover:text-rose-600">
-        <BottomNavigation
-          showLabels
+      {/* Cerrar sesión a la derecha: botón visible y accesible */}
+      <Box>
+        <button
           onClick={logout}
-          className="rounded-lg hover:text-rose-600"
+          className="cursor-pointer flex items-center gap-3 rounded-md bg-rose-50 px-4 py-2 text-rose-700 hover:bg-rose-100 focus:outline-none focus:ring-2 focus:ring-rose-200"
+          aria-label="Cerrar sesión"
         >
-          <BottomNavigationAction
-            label="CERRAR SESIÓN"
-            icon={<LogoutTwoToneIcon
-              className="rounded-lg hover:text-rose-600"
-
-            />}
-          />
-        </BottomNavigation>
+          <LogoutTwoToneIcon />
+          <span className="hidden sm:inline-block font-semibold">Cerrar sesión</span>
+        </button>
       </Box>
     </Box>
   )

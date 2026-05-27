@@ -80,8 +80,9 @@ export default function CustomizedDialogs({
             open={open}
             fullWidth
             maxWidth="md"
+            PaperProps={{ sx: { borderRadius: 4, border: '1px solid #e2e8f0', backgroundColor: '#ffffff' } }}
         >
-            <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title" className={'text-center'}>
+            <DialogTitle sx={{ m: 0, p: 2, color: '#0f172a', fontWeight: 700 }} id="customized-dialog-title" className={'text-center'}>
                 DETALLE DEL PUNTO VENTA {sucursal} DIA {detalles[0]?.FECHA}
             </DialogTitle>
             <IconButton
@@ -97,9 +98,9 @@ export default function CustomizedDialogs({
                 <CloseIcon />
             </IconButton>
 
-            <DialogContent dividers>
-                <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 500 }} aria-label="simple table">
+            <DialogContent dividers sx={{ borderColor: '#e2e8f0' }}>
+                <TableContainer component={Paper} sx={{ boxShadow: 'none', border: '1px solid #e2e8f0' }}>
+                    <Table sx={{ minWidth: 500, '& .MuiTableCell-root': { borderColor: '#e2e8f0', color: '#0f172a' } }} aria-label="simple table">
                         <TableHead>
                             <TableRow>
                                 <TableCell align="center">CATEGORIA COMERCIAL</TableCell>

@@ -57,10 +57,10 @@ export default function LiquidezForm({ zona }: { zona: string }): JSX.Element {
 
     return (
         <>
-            <div className="bg-white mt-4  shadow-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.3)] rounded-xl p-4 mb-4">
+            <div className="mt-4 mb-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-[0_0_10px_rgba(15,23,42,0.06)]">
                 <div className="flex justify-between">
-                    <h2 className="text-lg font-semibold mb-3">Filtros</h2>
-                    <h2 className="text-lg font-semibold mb-3 text-red-600">
+                    <h2 className="mb-3 text-lg font-semibold text-slate-900">Filtros</h2>
+                    <h2 className="mb-3 text-lg font-semibold text-slate-600">
                         Última hora de actualización: <UlltimaHora horazona={filteredLiquidez[0]} />
                     </h2>
                 </div>
@@ -69,12 +69,12 @@ export default function LiquidezForm({ zona }: { zona: string }): JSX.Element {
                     {/* Estado */}
                     <div>
 
-                        <label className="block text-sm font-medium mb-1">Selecione el Estado</label>
+                        <label className="mb-1 block text-sm font-medium text-slate-700">Selecione el Estado</label>
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             label="Estado Liquidez"
-                            className="w-full border h-12 rounded-lg p-2"
+                            className="h-12 w-full rounded-lg border border-slate-300 bg-white p-2 text-slate-900"
                             value={searchLiquidez}
                             onChange={(e) => setSearchLiquidez(e.target.value)}
                             displayEmpty
@@ -91,12 +91,12 @@ export default function LiquidezForm({ zona }: { zona: string }): JSX.Element {
                     </div>
                     {/* Dispositivo */}
                     <div>
-                        <label className="block text-sm font-medium mb-1">Selecione el Dispositivo</label>
+                        <label className="mb-1 block text-sm font-medium text-slate-700">Selecione el Dispositivo</label>
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             label="Dispositivo"
-                            className="w-full h-12 border rounded-lg p-2"
+                            className="h-12 w-full rounded-lg border border-slate-300 bg-white p-2 text-slate-900"
                             value={searchDispositivo}
                             onChange={(e) => setSearchDispositivo(e.target.value)}
                             displayEmpty
@@ -113,14 +113,14 @@ export default function LiquidezForm({ zona }: { zona: string }): JSX.Element {
                     {/*centro de constos */}
                     {empresa === "Multired" && (
                         <div>
-                            <label className="block text-sm font-medium mb-1">
+                            <label className="mb-1 block text-sm font-medium text-slate-700">
                                 Seleccione el centro de costos
                             </label>
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 label="Dispositivo"
-                                className="w-full h-12 border rounded-lg p-2"
+                                className="h-12 w-full rounded-lg border border-slate-300 bg-white p-2 text-slate-900"
                                 value={centroc}
                                 onChange={(e) => setCentroc(e.target.value)}
                                 displayEmpty
@@ -139,11 +139,11 @@ export default function LiquidezForm({ zona }: { zona: string }): JSX.Element {
 
                     {/* Punto de Venta */}
                     <div>
-                        <label className="block text-sm font-medium mb-1">Punto de Venta</label>
+                        <label className="mb-1 block text-sm font-medium text-slate-700">Punto de Venta</label>
                         <input
                             type="text"
                             placeholder="Buscar punto de venta"
-                            className="w-full border rounded-lg p-2"
+                            className="w-full rounded-lg border border-slate-300 bg-white p-2 text-slate-900 placeholder:text-slate-400"
                             value={searchPDV} onChange={(e) => setSearchPDV(e.target.value)}
                         />
                     </div>

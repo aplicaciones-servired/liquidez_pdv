@@ -14,10 +14,10 @@ export function CambiarCompany (): JSX.Element {
   return (
     <>
       <section className="fixed inset-0 z-50 flex items-center justify-center px-4 py-6">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.28),_transparent_35%),radial-gradient(circle_at_bottom,_rgba(244,63,94,0.26),_transparent_32%),linear-gradient(135deg,_rgba(15,23,42,0.94),_rgba(30,41,59,0.92))] backdrop-blur-sm" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.16),_transparent_35%),radial-gradient(circle_at_bottom,_rgba(244,63,94,0.14),_transparent_32%),linear-gradient(135deg,_rgba(248,250,252,0.96),_rgba(226,232,240,0.94))] backdrop-blur-sm" />
 
         <article
-          className="relative w-full max-w-xl overflow-hidden rounded-[2rem] border border-white/10 bg-slate-950/90 p-6 text-white shadow-[0_30px_120px_rgba(15,23,42,0.6)] sm:p-8"
+          className="relative w-full max-w-xl overflow-hidden rounded-[2rem] border border-slate-200 bg-white/95 p-6 text-slate-900 shadow-[0_30px_120px_rgba(15,23,42,0.14)] sm:p-8"
           role="dialog"
           aria-modal="true"
           aria-labelledby="company-dialog-title"
@@ -32,32 +32,32 @@ export function CambiarCompany (): JSX.Element {
             </div>
 
             <div className="space-y-2">
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan-300">
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan-700">
                 Selección de empresa
               </p>
-              <h2 id="company-dialog-title" className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+              <h2 id="company-dialog-title" className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
                 Antes de continuar, elige una empresa
               </h2>
-              <p className="max-w-lg text-sm leading-6 text-slate-300 sm:text-base">
+              <p className="max-w-lg text-sm leading-6 text-slate-600 sm:text-base">
                 Tu cuenta está vinculada a 2 empresas. Selecciona la que vas a administrar para cargar el formulario correcto.
               </p>
             </div>
           </div>
 
-          <div className="mt-6 grid gap-4 rounded-3xl border border-white/10 bg-white/5 p-4 sm:p-5">
-            <div className="grid gap-3 text-sm text-slate-200 sm:grid-cols-2">
-              <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-4">
-                <p className="text-xs uppercase tracking-[0.24em] text-slate-400">Cuenta actual</p>
-                <p className="mt-2 font-semibold text-white">{username.names || username.username || 'Usuario autenticado'}</p>
+          <div className="mt-6 grid gap-4 rounded-3xl border border-slate-200 bg-slate-50 p-4 sm:p-5">
+            <div className="grid gap-3 text-sm text-slate-700 sm:grid-cols-2">
+              <div className="rounded-2xl border border-slate-200 bg-white p-4">
+                <p className="text-xs uppercase tracking-[0.24em] text-slate-500">Cuenta actual</p>
+                <p className="mt-2 font-semibold text-slate-900">{username.names || username.username || 'Usuario autenticado'}</p>
               </div>
-              <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-4">
-                <p className="text-xs uppercase tracking-[0.24em] text-slate-400">Empresas disponibles</p>
-                <p className="mt-2 font-semibold text-white">Servired y Multired</p>
+              <div className="rounded-2xl border border-slate-200 bg-white p-4">
+                <p className="text-xs uppercase tracking-[0.24em] text-slate-500">Empresas disponibles</p>
+                <p className="mt-2 font-semibold text-slate-900">Servired y Multired</p>
               </div>
             </div>
 
             <div className="space-y-2">
-              <span className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-300">
+              <span className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500">
                 Selecciona una empresa
               </span>
 
@@ -65,18 +65,18 @@ export function CambiarCompany (): JSX.Element {
                 <button
                   type="button"
                   onClick={() => handleEmpresaChange('Servired')}
-                  className="group cursor-pointer rounded-2xl border border-white/10 bg-slate-900/70 p-4 text-left transition hover:-translate-y-0.5 hover:border-cyan-300/60 hover:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-cyan-400/30"
+                  className="group cursor-pointer rounded-2xl border border-slate-200 bg-white p-4 text-left transition hover:-translate-y-0.5 hover:border-cyan-300 hover:bg-cyan-50 focus:outline-none focus:ring-2 focus:ring-cyan-400/30"
                 >
                   <div className="flex items-center justify-between gap-3">
                     <div>
-                      <p className="text-sm uppercase tracking-[0.22em] text-slate-400">Opción 1</p>
-                      <p className="mt-2 text-xl font-bold text-white">Servired</p>
+                      <p className="text-sm uppercase tracking-[0.22em] text-slate-500">Opción 1</p>
+                      <p className="mt-2 text-xl font-bold text-slate-900">Servired</p>
                     </div>
                     <span className="flex h-10 w-10 items-center justify-center rounded-full bg-cyan-400/10 text-cyan-300 ring-1 ring-cyan-300/20 transition group-hover:bg-cyan-400/20">
                       1
                     </span>
                   </div>
-                  <p className="mt-3 text-sm leading-6 text-slate-300">
+                  <p className="mt-3 text-sm leading-6 text-slate-600">
                     Selecciona esta empresa para trabajar con el flujo correspondiente.
                   </p>
                 </button>
@@ -84,25 +84,25 @@ export function CambiarCompany (): JSX.Element {
                 <button
                   type="button"
                   onClick={() => handleEmpresaChange('Multired')}
-                  className="group cursor-pointer rounded-2xl border border-white/10 bg-slate-900/70 p-4 text-left transition hover:-translate-y-0.5 hover:border-rose-300/60 hover:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-rose-400/30"
+                  className="group cursor-pointer rounded-2xl border border-slate-200 bg-white p-4 text-left transition hover:-translate-y-0.5 hover:border-rose-300 hover:bg-rose-50 focus:outline-none focus:ring-2 focus:ring-rose-400/30"
                 >
                   <div className="flex items-center justify-between gap-3">
                     <div>
-                      <p className="text-sm uppercase tracking-[0.22em] text-slate-400">Opción 2</p>
-                      <p className="mt-2 text-xl font-bold text-white">Multired</p>
+                      <p className="text-sm uppercase tracking-[0.22em] text-slate-500">Opción 2</p>
+                      <p className="mt-2 text-xl font-bold text-slate-900">Multired</p>
                     </div>
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-rose-400/10 text-rose-300 ring-1 ring-rose-300/20 transition group-hover:bg-rose-400/20">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-rose-400/10 text-rose-600 ring-1 ring-rose-300/20 transition group-hover:bg-rose-400/20">
                       2
                     </span>
                   </div>
-                  <p className="mt-3 text-sm leading-6 text-slate-300">
+                  <p className="mt-3 text-sm leading-6 text-slate-600">
                     Selecciona esta empresa para cargar su información y formularios.
                   </p>
                 </button>
               </div>
             </div>
 
-            <p className="text-xs leading-5 text-slate-400">
+            <p className="text-xs leading-5 text-slate-500">
               Al elegir una opción, la aplicación cargará automáticamente el flujo asociado a esa empresa.
             </p>
           </div>

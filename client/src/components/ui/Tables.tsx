@@ -50,11 +50,11 @@ export default function Tables({ items }: LiquidezTableProps) {
   return (
     <Box display="flex" flexDirection="column" gap={2} flex={1}>
       {/* 🔹 Top 5 Exceso de Efectivo */}
-      <Paper className="border-1 border-blue-500 rounded-2xl w-full ">
-        <Typography variant="h6" sx={{ p: 2 }}>
+      <Paper className="w-full rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <Typography variant="h6" sx={{ p: 2, color: '#0f172a', fontWeight: 700 }}>
           Top 5 Exceso de Efectivo
         </Typography>
-        <Table size="small">
+        <Table size="small" sx={{ '& .MuiTableCell-root': { borderColor: '#e2e8f0', color: '#0f172a' } }}>
           <TableHead>
             <TableRow>
               <TableCell>Nombre</TableCell>
@@ -77,11 +77,11 @@ export default function Tables({ items }: LiquidezTableProps) {
       </Paper>
 
       {/* 🔹 Top 5 Baja Liquidez */}
-      <Paper className="border-1 border-red-500 rounded-2xl w-full">
-        <Typography variant="h6" sx={{ p: 2 }}>
+      <Paper className="w-full rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <Typography variant="h6" sx={{ p: 2, color: '#0f172a', fontWeight: 700 }}>
           Top 5 Baja Liquidez
         </Typography>
-        <Table size="small">
+        <Table size="small" sx={{ '& .MuiTableCell-root': { borderColor: '#e2e8f0', color: '#0f172a' } }}>
           <TableHead>
             <TableRow>
               <TableCell>Nombre</TableCell>
