@@ -1,8 +1,6 @@
 import { useAuth } from '../auth/AuthContext'
 import { NavLink } from 'react-router-dom'
 import type { JSX } from "react/jsx-runtime";
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction'
 import LogoutTwoToneIcon from '@mui/icons-material/LogoutTwoTone';
 import Box from '@mui/material/Box';
 const Links = [
