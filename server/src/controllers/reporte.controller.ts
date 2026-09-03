@@ -9,7 +9,7 @@ const empresaPorZona: Record<string, string> = {
 };
 
 export const getReporte = async (
-  req: Request,
+  req: Request<{ zona: string }>,
   res: Response
 ): Promise<void> => {
   const { zona } = req.params;
