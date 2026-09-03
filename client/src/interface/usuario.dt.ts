@@ -7,4 +7,5 @@ export interface User {
   company: string;
   process: string;
   sub_process: string;
+  companies?: string[];
 }

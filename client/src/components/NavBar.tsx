@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 const Links = [
   { link: '/home', name: 'Home' },
   { link: '/dashboard', name: 'Dashboard' },
+  { link: '/reporte', name: 'Reporte' },
 ]
 
 const LinkComponent = ({ link, name }: { link: string, name: string }): JSX.Element => {

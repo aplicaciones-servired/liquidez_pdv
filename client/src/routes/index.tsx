@@ -4,6 +4,7 @@ import Root from './Root'
 
 const HomePage = lazy(async () => await import('../pages/home'))
 const Dashboard = lazy(async () => await import('../components/Dashboard'))
+const ReportePage = lazy(async () => await import('../pages/reporte'))
 
 export const BrowserRouters = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ export const BrowserRouters = createBrowserRouter([
       {
         path: '/dashboard',
         element: <Suspense fallback={<div>Loading...</div>}><Dashboard /></Suspense>
+      },
+      {
+        path: '/reporte',
+        element: <Suspense fallback={<div>Loading...</div>}><ReportePage /></Suspense>
       },
     ]
   }
