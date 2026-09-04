@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react'
 import axios from 'axios'
 import AssessmentOutlinedIcon from '@mui/icons-material/AssessmentOutlined'
 import SearchIcon from '@mui/icons-material/Search'
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined'
 import { toast } from 'react-toastify'
 import { useAuth } from '../auth/AuthContext'
 import { API_URL } from '../utils/contanst'
@@ -25,6 +26,37 @@ const today = (): string => {
 
 const amount = (value: number | string | null): string =>
     Number(value ?? 0).toLocaleString('es-CO')
+
+const exportExcel = (rows: ReporteRow[], fileName: string): void => {
+    const headers = ['FECHA', 'TIPO', 'SUCURSAL', 'NOMBRE', 'INGRESOS', 'EGRESOS', 'BALANCE']
+
+    const body = rows
+        .map((row) =>
+            [row.FECHA, row.TIPO ?? '', row.SUCURSAL, row.NOMBRE ?? '', Number(row.ING ?? 0), Number(row.EGR ?? 0), Number(row.BALANCE ?? 0)]
+                .map((cell) => `<td>${cell}</td>`)
+                .join('')
+        )
+        .join('</tr><tr>')
+
+    const html =
+        '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">' +
+        '<head><meta charset="UTF-8"><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>' +
+        '<x:Name>Reporte</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions>' +
+        '</x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head>' +
+        `<body><table border="1"><tr>${headers.map((h) => `<th style="background-color:#155e75;color:#ffffff">${h}</th>`).join('')}</tr><tr>${body}</tr></table></body></html>`
+
+    const blob = new Blob([`\ufeff${html}`], {
+        type: 'application/vnd.ms-excel;charset=utf-8',
+    })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `${fileName}.xls`
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    URL.revokeObjectURL(url)
+}
 
 const getAvailableCompanies = (user: User): string[] => {
     const userData = user as User & { companies?: unknown; company: unknown }
@@ -142,7 +174,19 @@ export default function ReportePage(): JSX.Element {
                 <div className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
                     <div className="flex items-center justify-between border-b border-slate-200 px-6 py-4 sm:px-8">
                         <h2 className="font-bold text-slate-900">Resultados</h2>
-                        <span className="text-sm text-slate-500">{filteredRows.length} sucursales</span>
+                        <div className="flex items-center gap-4">
+                            <span className="text-sm text-slate-500">{filteredRows.length} sucursales</span>
+                            {filteredRows.length > 0 && (
+                                <button
+                                    type="button"
+                                    onClick={() => exportExcel(filteredRows, `Reporte_${empresa}_${fecha}`)}
+                                    className="flex h-9 items-center gap-2 rounded-lg bg-emerald-600 px-4 text-sm font-semibold text-white transition hover:bg-emerald-700"
+                                >
+                                    <FileDownloadOutlinedIcon fontSize="small" />
+                                    Exportar Excel
+                                </button>
+                            )}
+                        </div>
                     </div>
 
                     <div className="overflow-x-auto">
